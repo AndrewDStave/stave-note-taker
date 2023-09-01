@@ -4,7 +4,7 @@ const path = require('path');
 const uuid = require('uuid');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 2323;
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
@@ -29,7 +29,6 @@ app.delete('/api/notes/:id', (req, res) => {
   const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db.json')));
   const updatedNotes = notes.filter(note => note.id !== id);
   fs.writeFileSync(path.join(__dirname, 'db.json'), JSON.stringify(updatedNotes));
-  res.json({ message: 'Note deleted' });
 });
 
 app.get('/notes', (req, res) => {
@@ -43,3 +42,5 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// I got some help with a family member on this page. I still don't understand what to do with db.json, but I feel like I have learned a lot from this assignment.
